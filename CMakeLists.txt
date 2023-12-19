@@ -8,6 +8,6 @@ list(APPEND CONF_FILE "boards/nucleo_g474re.conf")
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(se28cp_app)
 
-target_sources(app PRIVATE src/main.c)
-
+target_sources(app PRIVATE src/dac.c)
+#src/main.c
 

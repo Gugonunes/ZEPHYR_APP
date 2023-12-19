@@ -6,6 +6,7 @@
         "device.h": "c",
         "kernel.h": "c",
         "kernel_includes.h": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "arm_const_structs.h": "c"
     }
 }

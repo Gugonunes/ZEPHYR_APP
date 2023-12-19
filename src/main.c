@@ -56,27 +56,10 @@ static const struct led led0 = {
 };
 
 // --------------------------------------------
-// criando uma função zbus que escuta o valor do button_pressed_count 
-// e quando chega a 10 ele mostra algo no shell
-
-// ZBUS_CHAN_DEFINE(count_chan, int32_t, NULL, NULL,
-//                   ZBUS_OBSERVERS(thread_handler1_sub),
-//                   ZBUS_MSG_INIT(0)
-// );
-
-// void zbus_chan_subscriber_thread(void) {
-//     while(1){
-//       k_msleep(1000);
-//     }
-// }
-
-// K_THREAD_DEFINE(thread_handler1_id, STACKSIZE, zbus_chan_subscriber_thread,
-//                 NULL, NULL, NULL, PRIORITY, 0, 0);
-
-// ZBUS_SUBSCRIBER_DEFINE(thread_handler1_sub, 4);
 
 // --------------------------------------------
-// Gerenciamento de um botão
+// Gerenciamento de um botão e declaraçao do zbus
+// O zbus é utilizado aqui para validar se o número é par ou ímpar
 
 static const struct gpio_dt_spec button =
     GPIO_DT_SPEC_GET_OR(SW0_NODE, gpios, {0});
@@ -145,7 +128,6 @@ int button_thread(void) {
 
   gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));
   gpio_add_callback(button.port, &button_cb_data);
-  //zbus_chan_pub(&count_button, 1, K_MSEC(1000));
   printk("Botão inicializado em %s, pin %d\n", button.port->name, button.pin);
 
   printk("Pressione o botão para começar a contar.\n");
@@ -158,7 +140,17 @@ int button_thread(void) {
 }
 
 // --------------------------------------------
+// Comando personalizado para gerar um sinal DAC
+static int cmd_dac(const struct shell *shell, size_t argc, char** argv) {
+  ARG_UNUSED(argc);
+  ARG_UNUSED(argv);
+  printk("Gerando sinal DAC\n");
+  // funcao que gera o DAC
+  
+  return 0;
+}
 
+SHELL_CMD_ARG_REGISTER(dac, NULL, "Description: create dac", cmd_dac, 1, 0);
 
 // --------------------------------------------
 // Led de atividade com softtimer usando k work
@@ -220,10 +212,10 @@ int main(void)
   printk("Ligando os motores vrummm\n");
 	blink0_work_init();
 
-    k_work_submit(&blink_scheduler_work);
-    
-    while (1) {
-        k_sleep(K_FOREVER);
-    }
+  k_work_submit(&blink_scheduler_work);
+  
+  while (1) {
+      k_sleep(K_FOREVER);
+  }
 	return 0;
 }

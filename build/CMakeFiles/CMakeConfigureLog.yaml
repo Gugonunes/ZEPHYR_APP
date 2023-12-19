@@ -12,7 +12,7 @@ events:
       - "CMakeLists.txt:8 (find_package)"
     message: |
       The target system is: Generic - 3.5.99 - arm
-      The host system is: Linux - 6.2.0-37-generic - x86_64
+      The host system is: Linux - 6.2.0-39-generic - x86_64
   -
     kind: "message-v1"
     backtrace:

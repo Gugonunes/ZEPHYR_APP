@@ -59,9 +59,9 @@
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/crc/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/CMakeFiles/rebuild_cache.dir
-/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir
-/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/picolibc/CMakeFiles/edit_cache.dir
-/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/picolibc/CMakeFiles/rebuild_cache.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/newlib/CMakeFiles/lib__libc__newlib.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/newlib/CMakeFiles/edit_cache.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/newlib/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/common/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/lib/libc/common/CMakeFiles/rebuild_cache.dir
@@ -187,6 +187,7 @@
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis/cmsis/CMSIS/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis/cmsis/CMSIS/Core/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis/cmsis/CMSIS/Core/CMakeFiles/rebuild_cache.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis-dsp/CMakeFiles/modules__cmsis-dsp.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis-dsp/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis-dsp/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/modules/cmsis-nn/CMakeFiles/edit_cache.dir

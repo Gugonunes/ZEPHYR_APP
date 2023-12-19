@@ -15,7 +15,6 @@
 /home/gustavo/zephyrproject/modules/hal/telink/tlsr9/ble/vendor/controller/Kconfig
 /home/gustavo/zephyrproject/modules/lib/gui/lvgl/Kconfig
 /home/gustavo/zephyrproject/modules/lib/picolibc/zephyr/Kconfig
-/home/gustavo/zephyrproject/zephyr/Kconfig
 /home/gustavo/zephyrproject/zephyr/Kconfig.zephyr
 /home/gustavo/zephyrproject/zephyr/arch/Kconfig
 /home/gustavo/zephyrproject/zephyr/arch/arm/Kconfig
@@ -2291,5 +2290,6 @@
 /home/gustavo/zephyrproject/zephyr/subsys/usb/host/Kconfig
 /home/gustavo/zephyrproject/zephyr/subsys/usb/usb_c/Kconfig
 /home/gustavo/zephyrproject/zephyr/subsys/zbus/Kconfig
+/home/gustavo/zephyrproject/zephyr/zephyr_app/Kconfig
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/Kconfig/Kconfig.dts
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/Kconfig/Kconfig.modules
