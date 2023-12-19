@@ -131,6 +131,8 @@ ztest :
  {
   KEEP(*(".dbg_thread_info"));
  } > FLASH
+ zbus_channel_area : SUBALIGN(4) { _zbus_channel_list_start = .; KEEP(*(SORT_BY_NAME(._zbus_channel.static.*))); _zbus_channel_list_end = .; } > FLASH
+ zbus_channel_observation_area : SUBALIGN(4) { _zbus_channel_observation_list_start = .; KEEP(*(SORT_BY_NAME(._zbus_channel_observation.static.*))); _zbus_channel_observation_list_end = .; } > FLASH
  symbol_to_keep : ALIGN_WITH_INPUT
  {
   __symbol_to_keep_start = .;
@@ -232,6 +234,8 @@ __ramfunc_load_start = LOADADDR(.ramfunc);
  k_condvar_area : ALIGN_WITH_INPUT SUBALIGN(4) { _k_condvar_list_start = .; *(SORT_BY_NAME(._k_condvar.static.*)); _k_condvar_list_end = .; } > RAM AT > FLASH
  sys_mem_blocks_ptr_area : ALIGN_WITH_INPUT SUBALIGN(4) { _sys_mem_blocks_ptr_list_start = .; *(SORT_BY_NAME(._sys_mem_blocks_ptr.static.*)); _sys_mem_blocks_ptr_list_end = .; } > RAM AT > FLASH
  net_buf_pool_area : ALIGN_WITH_INPUT SUBALIGN(4) { _net_buf_pool_list_start = .; KEEP(*(SORT_BY_NAME(._net_buf_pool.static.*))); _net_buf_pool_list_end = .; } > RAM AT > FLASH
+ zbus_observer_area : ALIGN_WITH_INPUT SUBALIGN(4) { _zbus_observer_list_start = .; KEEP(*(SORT_BY_NAME(._zbus_observer.static.*))); _zbus_observer_list_end = .; } > RAM AT > FLASH
+ zbus_channel_observation_mask_area : ALIGN_WITH_INPUT SUBALIGN(1) { _zbus_channel_observation_mask_list_start = .; KEEP(*(SORT_BY_NAME(._zbus_channel_observation_mask.static.*))); _zbus_channel_observation_mask_list_end = .; } > RAM AT > FLASH
     __data_region_end = .;
    bss (NOLOAD) : ALIGN_WITH_INPUT
  {

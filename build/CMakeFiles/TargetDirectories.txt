@@ -136,6 +136,9 @@
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/shell/modules/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/shell/backends/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/shell/backends/CMakeFiles/rebuild_cache.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/zbus/CMakeFiles/edit_cache.dir
+/home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/subsys/zbus/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/drivers/CMakeFiles/edit_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/drivers/CMakeFiles/rebuild_cache.dir
 /home/gustavo/zephyrproject/zephyr/zephyr_app/build/zephyr/drivers/disk/CMakeFiles/edit_cache.dir

@@ -4,17 +4,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/sys/__assert.h>
+#include <zephyr/sys/util.h>
 #include <zephyr/shell/shell.h>
 #include <string.h>
 #include <inttypes.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/zbus/zbus.h>
+#include <zephyr/kernel.h>
+
 #define ZEPHYR_USER_NODE DT_PATH(zephyr_user)
+#define CONFIG_SYS_CLOCK_TICKS_PER_SEC 1000
+#define CONFIG_NUM_PREEMPT_PRIORITIES 15
+#define ARCH_STACK_PTR_ALIGN 8
 
 #define LED0_NODE DT_ALIAS(led0)
 #define LED1_NODE DT_ALIAS(led1)
@@ -51,18 +56,24 @@ static const struct led led0 = {
 };
 
 // --------------------------------------------
-// Comando personalizado para hello
-static int cmd_hello(const struct shell *shell, size_t argc, char** argv) {
-	ARG_UNUSED(argc);
-	ARG_UNUSED(argv);
+// criando uma função zbus que escuta o valor do button_pressed_count 
+// e quando chega a 10 ele mostra algo no shell
 
-	shell_print(shell, "It's me. I was wondering if after all these years you'd like to meet");
-	return 0;
-}
+// ZBUS_CHAN_DEFINE(count_chan, int32_t, NULL, NULL,
+//                   ZBUS_OBSERVERS(thread_handler1_sub),
+//                   ZBUS_MSG_INIT(0)
+// );
 
-SHELL_CMD_ARG_REGISTER(hello, NULL, "Description: say hello", cmd_hello, 1, 0);
-// --------------------------------------------
+// void zbus_chan_subscriber_thread(void) {
+//     while(1){
+//       k_msleep(1000);
+//     }
+// }
 
+// K_THREAD_DEFINE(thread_handler1_id, STACKSIZE, zbus_chan_subscriber_thread,
+//                 NULL, NULL, NULL, PRIORITY, 0, 0);
+
+// ZBUS_SUBSCRIBER_DEFINE(thread_handler1_sub, 4);
 
 // --------------------------------------------
 // Gerenciamento de um botão
@@ -73,10 +84,42 @@ static struct gpio_callback button_cb_data;
 static int32_t button_pressed_count = 0;
 
 
+ZBUS_CHAN_DEFINE(count_button, int32_t, NULL, NULL,
+                  ZBUS_OBSERVERS(thread_handler1_sub),
+                  ZBUS_MSG_INIT(0)
+);
+
+ZBUS_CHAN_DECLARE(count_button);
+ZBUS_SUBSCRIBER_DEFINE(thread_handler1_sub, 4);
+
+// --------------------------------------------
+// Comando personalizado para validar
+static int cmd_validar(const struct shell *shell, size_t argc, char** argv) {
+	ARG_UNUSED(argc);
+	ARG_UNUSED(argv);
+  const struct zbus_chan *chan;
+
+	while (!zbus_sub_wait(&thread_handler1_sub, &chan, K_MSEC(200))) {
+		int msg;
+
+		zbus_chan_read(chan, &msg, K_MSEC(1000));
+    if(msg %2 == 0)
+    {
+		    printk("O valor do contador é: %d\nE é um valor par\n", msg);
+    } else {
+        printk("O valor do contador é: %d\nE é um valor ímpar\n", msg);
+    }
+	}
+  return 0;
+}
+
+SHELL_CMD_ARG_REGISTER(validar, NULL, "Description: validate number", cmd_validar, 1, 0);
+
 static void button_pressed(const struct device *dev, struct gpio_callback *cb,
                            uint32_t pins) {
   button_pressed_count++;
   printk("%" PRIu32 "\n", button_pressed_count);
+  zbus_chan_pub(&count_button, &button_pressed_count, K_MSEC(1000));
 }
 
 int button_thread(void) {
@@ -102,9 +145,14 @@ int button_thread(void) {
 
   gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));
   gpio_add_callback(button.port, &button_cb_data);
+  //zbus_chan_pub(&count_button, 1, K_MSEC(1000));
   printk("Botão inicializado em %s, pin %d\n", button.port->name, button.pin);
 
   printk("Pressione o botão para começar a contar.\n");
+
+  while (1) {
+      k_msleep(100);
+  }
 
   return 0;
 }
@@ -169,7 +217,7 @@ K_WORK_DEFINE(blink_scheduler_work, blink_scheduler);
 
 int main(void)
 {
-    printk("Ligando os motores vrummm\n");
+  printk("Ligando os motores vrummm\n");
 	blink0_work_init();
 
     k_work_submit(&blink_scheduler_work);
